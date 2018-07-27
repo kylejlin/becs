@@ -93,11 +93,22 @@ gameLoop();
 class Scene {
   constructor() {}
 
+  /// Adds destructor system to scene.
+  /// The system.destroy() function is called every time an entity
+  ///   with the specified components is removed from the scene.
+  /// See class DestructorSystem {} for more information.
+  addDestructorSystem(system) {}
+
   /// Adds entity to scene
   addEntity(entity) {}
 
   /// Adds system to scene
   addSystem(system) {}
+
+  /// Removes destructor system from the scene.
+  /// This is usually an expensive method, and you should avoid using it if
+  ///   possible.
+  expensivelyRemoveDestructorSystem(system) {}
 
   /// Removes entity from scene
   removeEntity(entity) {}
