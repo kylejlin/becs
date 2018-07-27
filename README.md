@@ -119,11 +119,27 @@ class Scene {
 ### `final class System`
 ```js
 class System {
-  // @param componentNames: Array<string> - The components that each
-  //   entity handled by this system must have.
-  // @param update: function<T: Scene>(entities: Array<object>, scene: T) - The
-  //   updater function that will be called by Scene.prototype.update().
+  /// @param componentNames: Array<string> - The components that each
+  ///   entity handled by this system must have.
+  /// @param update: function<T: Scene>(entities: Array<object>, scene: T) - The
+  ///   updater function that will be called by Scene.prototype.update().
   constructor(componentNames, update) {}
+}
+```
+
+### `final class DestructorSystem`
+```js
+/// A system that has a destroy function that is called every
+///   time an entity with all the specified components is
+///   removed from the scene.
+class DestructorSystem {
+  /// @param componentNames: Array<string> - The components that each
+  ///   entity handled by this system must have.
+  /// @param destroy: function<T: Scene>(entity: object, scene: T) - The
+  ///   destructor function that will be called every time an entity with
+  ///   all the components specified by componentNames is removed from the
+  ///   scene.
+  constructor(componentNames, destroy) {}
 }
 ```
 

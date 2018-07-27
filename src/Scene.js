@@ -4,6 +4,7 @@ class Scene {
   constructor() {
     this.entities_ = [];
     this.systems_ = [];
+    this.destructorSystems_ = [];
     this.indexes_ = [];
 
     this.componentNumberDict_ = {};
@@ -12,19 +13,52 @@ class Scene {
     this.globals = {};
   }
 
+  addDestructorSystem(system) {
+    const { componentNames, destroy } = system;
+    const bitmask = this.getBitmask_(componentNames);
+    const { entities } = this.indexes_
+      .find(index => this.constructor.equals_(index.bitmask, bitmask))
+      || {
+        entities: this.entities_
+          .filter(entity => this.constructor.subset_(bitmask, entity.bitmask_)),
+      };
+    for (const entity of entities) {
+      entity.destructors_.push(destroy);
+    }
+
+    this.destructorSystems_.push({
+      bitmask,
+      destroy,
+      rawRef: system,
+    });
+  }
+
   addEntity(entity) {
     const bitmask = this.getBitmask_(Object.keys(entity));
-    Object.defineProperty(entity, 'bitmask_', {
-      value: bitmask,
-      writable: true,
-      enumerable: false,
-      configurable: false,
+    Object.defineProperties(entity, {
+      bitmask_: {
+        value: bitmask,
+        writable: true,
+        enumerable: false,
+        configurable: false,
+      },
+      destructors_: {
+        value: [],
+        writable: false,
+        enumerable: false,
+        configurable: false,
+      },
     });
 
     this.entities_.push(entity);
     for (const index of this.indexes_) {
       if (this.constructor.subset_(index.bitmask, bitmask)) {
         index.entities.push(entity);
+      }
+    }
+    for (const destructorSystem of this.destructorSystems_) {
+      if (this.constructor.subset_(destructorSystem.bitmask, bitmask)) {
+        entity.destructors_.push(destructorSystem.destroy);
       }
     }
   }
@@ -51,7 +85,28 @@ class Scene {
     });
   }
 
+  expensivelyRemoveDestructorSystem(system) {
+    const i = this.destructorSystems_
+      .findIndex(destructorSystem => destructorSystem.rawRef === system);
+    if (i === -1) {
+      throw new Error('Destructor system not in scene.');
+    }
+    const destructorSystem = this.destructorSystems_[i];
+    const { destroy } = destructorSystem;
+    for (const entity of this.entities_) {
+      const i = entity.destructors_.indexOf(destroy);
+      if (i !== -1) {
+        entity.destructors_.splice(i, 1);
+      }
+    }
+    this.destructorSystems_.splice(i, 1);
+  }
+
   removeEntity(entity) {
+    for (const destroy of entity.destructors_) {
+      destroy(entity, this);
+    }
+
     const arraysToUpdate = this.indexes_
       .map(index => index.entities)
       .concat([this.entities_]);
