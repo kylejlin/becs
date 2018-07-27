@@ -6,7 +6,7 @@ module.exports = {
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
     libraryTarget: 'umd',
-    library: 'indexed-ecs',
+    library: 'becs',
   },
   mode: "production",
   module: {
@@ -18,6 +18,7 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env'],
+            plugins: ['transform-class-properties'],
           },
         },
       },
