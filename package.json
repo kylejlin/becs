@@ -1,0 +1,30 @@
+{
+  "name": "becs",
+  "version": "0.1.0",
+  "description": "Bitmasked entity-component-system library.",
+  "author": "Kyle Lin",
+  "license": "MIT",
+  "files": [
+    "dist/index.js"
+  ],
+  "main": "dist/index.js",
+  "scripts": {
+    "prepublish": "npm run build",
+    "start": "webpack --config ./webpack.dev.config.js",
+    "build": "webpack",
+    "lint": "eslint src/"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.51",
+    "@babel/preset-env": "^7.0.0-beta.51",
+    "babel-eslint": "^8.2.3",
+    "babel-loader": "^8.0.0-beta.3",
+    "eslint": "^4.19.1",
+    "gh-pages": "^1.2.0",
+    "idempotent-babel-polyfill": "^6.26.0",
+    "nodemon-webpack-plugin": "^3.0.1",
+    "serve": "^9.0.0",
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.5"
+  }
+}
