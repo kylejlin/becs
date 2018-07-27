@@ -63,18 +63,6 @@ class Scene {
     }
   }
 
-  removeEntityByNullification(entity) {
-    const arraysToUpdate = this.indexes_
-      .map(index => index.entities)
-      .concat([this.entities_]);
-    for (const array of arraysToUpdate) {
-      const i = array.indexOf(entity);
-      if (i !== -1) {
-        array[i] = null;
-      }
-    }
-  }
-
   removeSystem(system) {
     const i = this.systems_
       .findIndex(optimizedSystem => optimizedSystem.rawRef === system);
