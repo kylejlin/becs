@@ -8,6 +8,10 @@
     "dist/index.js"
   ],
   "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kylejlin/becs.git"
+  },
   "scripts": {
     "prepublish": "npm run build",
     "start": "webpack --config ./webpack.dev.config.js",
