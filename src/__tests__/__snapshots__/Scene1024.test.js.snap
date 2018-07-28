@@ -1,0 +1,619 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`systems work correctly: initial scene 1`] = `
+Scene1024 {
+  "componentNumberDict_": Object {
+    "Name": 1,
+    "Position": 0,
+    "Velocity": 2,
+  },
+  "destructorSystems_": Array [],
+  "entities_": Array [
+    Object {
+      "Name": Object {
+        "name": "Bob",
+      },
+      "Position": Object {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+      },
+    },
+    Object {
+      "Name": Object {
+        "name": "Joe",
+      },
+      "Position": Object {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+      },
+      "Velocity": Object {
+        "x": 1,
+        "y": 0,
+        "z": 0,
+      },
+    },
+    Object {
+      "Name": Object {
+        "name": "Larry",
+      },
+      "Position": Object {
+        "x": 0,
+        "y": 10,
+        "z": 0,
+      },
+      "Velocity": Object {
+        "x": 0,
+        "y": 5,
+        "z": 8,
+      },
+    },
+  ],
+  "globals": Object {},
+  "indexes_": Array [
+    Object {
+      "bitmask": Int32Array [
+        5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+      ],
+      "dependents": 1,
+      "entities": Array [
+        Object {
+          "Name": Object {
+            "name": "Joe",
+          },
+          "Position": Object {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+          },
+          "Velocity": Object {
+            "x": 1,
+            "y": 0,
+            "z": 0,
+          },
+        },
+        Object {
+          "Name": Object {
+            "name": "Larry",
+          },
+          "Position": Object {
+            "x": 0,
+            "y": 10,
+            "z": 0,
+          },
+          "Velocity": Object {
+            "x": 0,
+            "y": 5,
+            "z": 8,
+          },
+        },
+      ],
+    },
+  ],
+  "numberOfRegisteredComponents_": 3,
+  "systems_": Array [
+    Object {
+      "index": Object {
+        "bitmask": Int32Array [
+          5,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+        ],
+        "dependents": 1,
+        "entities": Array [
+          Object {
+            "Name": Object {
+              "name": "Joe",
+            },
+            "Position": Object {
+              "x": 0,
+              "y": 0,
+              "z": 0,
+            },
+            "Velocity": Object {
+              "x": 1,
+              "y": 0,
+              "z": 0,
+            },
+          },
+          Object {
+            "Name": Object {
+              "name": "Larry",
+            },
+            "Position": Object {
+              "x": 0,
+              "y": 10,
+              "z": 0,
+            },
+            "Velocity": Object {
+              "x": 0,
+              "y": 5,
+              "z": 8,
+            },
+          },
+        ],
+      },
+      "rawRef": System {
+        "componentNames": Array [
+          "Position",
+          "Velocity",
+        ],
+        "update": [Function],
+      },
+      "update": [Function],
+    },
+  ],
+}
+`;
+
+exports[`systems work correctly: with inertia added 1`] = `
+Scene1024 {
+  "componentNumberDict_": Object {
+    "Name": 1,
+    "Position": 0,
+    "Velocity": 2,
+  },
+  "destructorSystems_": Array [],
+  "entities_": Array [
+    Object {
+      "Name": Object {
+        "name": "Bob",
+      },
+      "Position": Object {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+      },
+    },
+    Object {
+      "Name": Object {
+        "name": "Joe",
+      },
+      "Position": Object {
+        "x": 1,
+        "y": 0,
+        "z": 0,
+      },
+      "Velocity": Object {
+        "x": 1,
+        "y": 0,
+        "z": 0,
+      },
+    },
+    Object {
+      "Name": Object {
+        "name": "Larry",
+      },
+      "Position": Object {
+        "x": 0,
+        "y": 15,
+        "z": 8,
+      },
+      "Velocity": Object {
+        "x": 0,
+        "y": 5,
+        "z": 8,
+      },
+    },
+  ],
+  "globals": Object {},
+  "indexes_": Array [
+    Object {
+      "bitmask": Int32Array [
+        5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+      ],
+      "dependents": 1,
+      "entities": Array [
+        Object {
+          "Name": Object {
+            "name": "Joe",
+          },
+          "Position": Object {
+            "x": 1,
+            "y": 0,
+            "z": 0,
+          },
+          "Velocity": Object {
+            "x": 1,
+            "y": 0,
+            "z": 0,
+          },
+        },
+        Object {
+          "Name": Object {
+            "name": "Larry",
+          },
+          "Position": Object {
+            "x": 0,
+            "y": 15,
+            "z": 8,
+          },
+          "Velocity": Object {
+            "x": 0,
+            "y": 5,
+            "z": 8,
+          },
+        },
+      ],
+    },
+  ],
+  "numberOfRegisteredComponents_": 3,
+  "systems_": Array [
+    Object {
+      "index": Object {
+        "bitmask": Int32Array [
+          5,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+        ],
+        "dependents": 1,
+        "entities": Array [
+          Object {
+            "Name": Object {
+              "name": "Joe",
+            },
+            "Position": Object {
+              "x": 1,
+              "y": 0,
+              "z": 0,
+            },
+            "Velocity": Object {
+              "x": 1,
+              "y": 0,
+              "z": 0,
+            },
+          },
+          Object {
+            "Name": Object {
+              "name": "Larry",
+            },
+            "Position": Object {
+              "x": 0,
+              "y": 15,
+              "z": 8,
+            },
+            "Velocity": Object {
+              "x": 0,
+              "y": 5,
+              "z": 8,
+            },
+          },
+        ],
+      },
+      "rawRef": System {
+        "componentNames": Array [
+          "Position",
+          "Velocity",
+        ],
+        "update": [Function],
+      },
+      "update": [Function],
+    },
+  ],
+}
+`;
+
+exports[`systems work correctly: with inertia removed 1`] = `
+Scene1024 {
+  "componentNumberDict_": Object {
+    "Name": 1,
+    "Position": 0,
+    "Velocity": 2,
+  },
+  "destructorSystems_": Array [],
+  "entities_": Array [
+    Object {
+      "Name": Object {
+        "name": "Bob",
+      },
+      "Position": Object {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+      },
+    },
+    Object {
+      "Name": Object {
+        "name": "Larry",
+      },
+      "Position": Object {
+        "x": 0,
+        "y": 20,
+        "z": 16,
+      },
+      "Velocity": Object {
+        "x": 0,
+        "y": 5,
+        "z": 8,
+      },
+    },
+  ],
+  "globals": Object {},
+  "indexes_": Array [],
+  "numberOfRegisteredComponents_": 3,
+  "systems_": Array [],
+}
+`;
+
+exports[`systems work correctly: with joe removed 1`] = `
+Scene1024 {
+  "componentNumberDict_": Object {
+    "Name": 1,
+    "Position": 0,
+    "Velocity": 2,
+  },
+  "destructorSystems_": Array [],
+  "entities_": Array [
+    Object {
+      "Name": Object {
+        "name": "Bob",
+      },
+      "Position": Object {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+      },
+    },
+    Object {
+      "Name": Object {
+        "name": "Larry",
+      },
+      "Position": Object {
+        "x": 0,
+        "y": 20,
+        "z": 16,
+      },
+      "Velocity": Object {
+        "x": 0,
+        "y": 5,
+        "z": 8,
+      },
+    },
+  ],
+  "globals": Object {},
+  "indexes_": Array [
+    Object {
+      "bitmask": Int32Array [
+        5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+      ],
+      "dependents": 1,
+      "entities": Array [
+        Object {
+          "Name": Object {
+            "name": "Larry",
+          },
+          "Position": Object {
+            "x": 0,
+            "y": 20,
+            "z": 16,
+          },
+          "Velocity": Object {
+            "x": 0,
+            "y": 5,
+            "z": 8,
+          },
+        },
+      ],
+    },
+  ],
+  "numberOfRegisteredComponents_": 3,
+  "systems_": Array [
+    Object {
+      "index": Object {
+        "bitmask": Int32Array [
+          5,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+        ],
+        "dependents": 1,
+        "entities": Array [
+          Object {
+            "Name": Object {
+              "name": "Larry",
+            },
+            "Position": Object {
+              "x": 0,
+              "y": 20,
+              "z": 16,
+            },
+            "Velocity": Object {
+              "x": 0,
+              "y": 5,
+              "z": 8,
+            },
+          },
+        ],
+      },
+      "rawRef": System {
+        "componentNames": Array [
+          "Position",
+          "Velocity",
+        ],
+        "update": [Function],
+      },
+      "update": [Function],
+    },
+  ],
+}
+`;
