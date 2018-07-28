@@ -64,23 +64,30 @@ class Scene {
   }
 
   addSystem(system) {
-    const { componentNames, update } = system;
-    const bitmask = this.getBitmask_(componentNames);
-    let index = this.indexes_
-      .find(index => this.constructor.equals_(index.bitmask, bitmask));
-    if (!index) {
-      index = {
-        dependents: 0,
-        destructors: [],
-        bitmask,
-        entities: this.entities_
-          .filter(entity => this.constructor.subset_(bitmask, entity.bitmask_)),
-      };
-      this.indexes_.push(index);
+    const { filters, update } = system;
+    const systemIndexes = [];
+    for (const componentNames of filters) {
+      const bitmask = this.getBitmask_(componentNames);
+      let index = this.indexes_
+        .find(index => this.constructor.equals_(index.bitmask, bitmask));
+      if (!index) {
+        index = {
+          dependents: 0,
+          destructors: [],
+          bitmask,
+          entities: this.entities_
+            .filter(entity => this.constructor.subset_(bitmask, entity.bitmask_)),
+        };
+        this.indexes_.push(index);
+      }
+      index.dependents++;
+      systemIndexes.push(index);
     }
-    index.dependents++;
+
+    // TODO
     this.systems_.push({
-      index,
+      indexes: systemIndexes,
+      entityArrays: systemIndexes.map(index => index.entities),
       update,
       rawRef: system,
     });
@@ -141,25 +148,27 @@ class Scene {
       throw new Error('System not in scene.');
     }
     const optimizedSystem = this.systems_[i];
-    const { index } = optimizedSystem;
-    index.dependents--;
-    if (index.dependents === 0) {
-      const i = this.indexes_.indexOf(index);
-      if (i === -1) {
-        throw new Error(
-          'Could not find index in scene. '
-          + UNEXPECTED_ERROR_MESSAGE
-        );
+    const { indexes } = optimizedSystem;
+    for (const index of indexes) {
+      index.dependents--;
+      if (index.dependents === 0) {
+        const i = this.indexes_.indexOf(index);
+        if (i === -1) {
+          throw new Error(
+            'Could not find index in scene. '
+            + UNEXPECTED_ERROR_MESSAGE
+          );
+        }
+        this.indexes_.splice(i, 1);
       }
-      this.indexes_.splice(i, 1);
     }
     this.systems_.splice(i, 1);
   }
 
   update() {
     for (const optimizedSystem of this.systems_) {
-      const { index, update } = optimizedSystem;
-      update(index.entities, this);
+      const { entityArrays, update } = optimizedSystem;
+      update(entityArrays, this);
     }
   }
 

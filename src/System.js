@@ -1,6 +1,6 @@
 class System {
-  constructor(componentNames, update) {
-    this.componentNames = componentNames;
+  constructor(filters, update) {
+    this.filters = filters;
     this.update = update;
   }
 }

@@ -23,8 +23,10 @@ test('systems work correctly', () => {
   scene.addEntity(bob);
   scene.addEntity(joe);
   const inertia = new System(
-    ['Position', 'Velocity'],
-    (entities) => {
+    [
+      ['Position', 'Velocity']
+    ],
+    ([entities]) => {
       for (const ent of entities) {
         ent.Position.x += ent.Velocity.x;
         ent.Position.y += ent.Velocity.y;

@@ -71,7 +71,7 @@ const gameLoop = () => {
 gameLoop();
 ```
 
-## Provisional Docs
+## Provisional v0.5.0 Docs (v0.6.0 docs coming soon!)
 ### `base class Scene`
 ```js
 /// This is the base class for scenes.
