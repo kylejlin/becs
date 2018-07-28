@@ -106,9 +106,7 @@ class Scene {
   addSystem(system) {}
 
   /// Removes destructor system from the scene.
-  /// This is usually an expensive method, and you should avoid using it if
-  ///   possible.
-  expensivelyRemoveDestructorSystem(system) {}
+  removeDestructorSystem(system) {}
 
   /// Removes entity from scene
   removeEntity(entity) {}

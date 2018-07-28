@@ -16,20 +16,25 @@ class Scene {
   addDestructorSystem(system) {
     const { componentNames, destroy } = system;
     const bitmask = this.getBitmask_(componentNames);
-    const { entities } = this.indexes_
-      .find(index => this.constructor.equals_(index.bitmask, bitmask))
-      || {
+    let index = this.indexes_
+      .find(index => this.constructor.equals_(index.bitmask, bitmask));
+    if (!index) {
+      index = {
+        dependents: 0,
+        destructors: [],
+        bitmask,
         entities: this.entities_
           .filter(entity => this.constructor.subset_(bitmask, entity.bitmask_)),
       };
-    for (const entity of entities) {
-      entity.destructors_.push(destroy);
+      this.indexes_.push(index);
     }
+    index.dependents++;
+    index.destructors.push(destroy);
 
     this.destructorSystems_.push({
-      bitmask,
-      destroy,
-      rawRef: system,
+      index,
+      destroyRef: destroy,
+      sysRef: system,
     });
   }
 
@@ -56,11 +61,6 @@ class Scene {
         index.entities.push(entity);
       }
     }
-    for (const destructorSystem of this.destructorSystems_) {
-      if (this.constructor.subset_(destructorSystem.bitmask, bitmask)) {
-        entity.destructors_.push(destructorSystem.destroy);
-      }
-    }
   }
 
   addSystem(system) {
@@ -71,6 +71,7 @@ class Scene {
     if (!index) {
       index = {
         dependents: 0,
+        destructors: [],
         bitmask,
         entities: this.entities_
           .filter(entity => this.constructor.subset_(bitmask, entity.bitmask_)),
@@ -85,35 +86,50 @@ class Scene {
     });
   }
 
-  expensivelyRemoveDestructorSystem(system) {
+  removeDestructorSystem(system) {
     const i = this.destructorSystems_
-      .findIndex(destructorSystem => destructorSystem.rawRef === system);
+      .findIndex(destructorSystem => destructorSystem.sysRef === system);
     if (i === -1) {
       throw new Error('Destructor system not in scene.');
     }
     const destructorSystem = this.destructorSystems_[i];
-    const { destroy } = destructorSystem;
-    for (const entity of this.entities_) {
-      const i = entity.destructors_.indexOf(destroy);
-      if (i !== -1) {
-        entity.destructors_.splice(i, 1);
+    const { index, destroyRef } = destructorSystem;
+    const j = index.destructors.indexOf(destroyRef);
+    if (j === -1) {
+      throw new Error(
+        'Could not find destroy function in index. '
+        + UNEXPECTED_ERROR_MESSAGE
+      );
+    }
+    index.destructors.splice(j, 1);
+    index.dependents--;
+    if (index.dependents === 0) {
+      const i = this.indexes_.indexOf(index);
+      if (i === -1) {
+        throw new Error(
+          'Could not find index in scene. '
+          + UNEXPECTED_ERROR_MESSAGE
+        );
       }
+      this.indexes_.splice(i, 1);
     }
     this.destructorSystems_.splice(i, 1);
   }
 
   removeEntity(entity) {
-    for (const destroy of entity.destructors_) {
-      destroy(entity, this);
+    const i = this.entities_.indexOf(entity);
+    if (i === -1) {
+      throw new Error('Entity not in system.');
     }
+    this.entities_.splice(i, 1);
 
-    const arraysToUpdate = this.indexes_
-      .map(index => index.entities)
-      .concat([this.entities_]);
-    for (const array of arraysToUpdate) {
-      const i = array.indexOf(entity);
+    for (const index of this.indexes_) {
+      const i = index.entities.indexOf(entity);
       if (i !== -1) {
-        array.splice(i, 1);
+        for (const destroy of index.destructors) {
+          destroy(entity, this);
+        }
+        index.entities.splice(i, 1);
       }
     }
   }

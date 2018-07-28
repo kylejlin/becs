@@ -88,6 +88,7 @@ Scene1024 {
         0,
       ],
       "dependents": 1,
+      "destructors": Array [],
       "entities": Array [
         Object {
           "Name": Object {
@@ -161,6 +162,7 @@ Scene1024 {
           0,
         ],
         "dependents": 1,
+        "destructors": Array [],
         "entities": Array [
           Object {
             "Name": Object {
@@ -295,6 +297,7 @@ Scene1024 {
         0,
       ],
       "dependents": 1,
+      "destructors": Array [],
       "entities": Array [
         Object {
           "Name": Object {
@@ -368,6 +371,7 @@ Scene1024 {
           0,
         ],
         "dependents": 1,
+        "destructors": Array [],
         "entities": Array [
           Object {
             "Name": Object {
@@ -529,6 +533,7 @@ Scene1024 {
         0,
       ],
       "dependents": 1,
+      "destructors": Array [],
       "entities": Array [
         Object {
           "Name": Object {
@@ -587,6 +592,7 @@ Scene1024 {
           0,
         ],
         "dependents": 1,
+        "destructors": Array [],
         "entities": Array [
           Object {
             "Name": Object {
